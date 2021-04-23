@@ -47,3 +47,15 @@ export function deleteRoleById(id){
         method:'DELETE'
     })
 }
+
+
+export function changeUserRole(no,roleIds){
+    return request({
+        url:'/changeRole',
+        method:'POST',
+        data:{
+            no:no,
+            roleIds:roleIds
+        }
+    })
+}

@@ -8,11 +8,11 @@
     </el-breadcrumb>
 
     <el-card>
-      <el-row :gutter="20">
-        <el-col :span="4">
-          <el-button type="primary" @click="showAddDialog">添加角色</el-button>
-        </el-col>
-      </el-row>
+<!--      <el-row :gutter="20">-->
+<!--        <el-col :span="4">-->
+<!--          <el-button type="primary" @click="showAddDialog">添加角色</el-button>-->
+<!--        </el-col>-->
+<!--      </el-row>-->
 
       <el-table :data="roleList" border stripe>
         <el-table-column label="序号" type="index"></el-table-column>
@@ -20,15 +20,10 @@
         <el-table-column label="描述" prop="description"></el-table-column>
         <el-table-column label="操作" width="180px">
           <template slot-scope="scope">
-            <el-tooltip effect="dark" content="编辑" placement="top" :enterable="false">
-              <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDialog(scope.row.id)"></el-button>
-            </el-tooltip>
-            <el-tooltip effect="dark" content="删除" placement="top">
-              <el-button type="danger" icon="el-icon-delete" size="mini" :enterable="false" @click="deleteRole(scope.row.id)"></el-button>
-            </el-tooltip>
-            <el-tooltip effect="dark" content="分配权限" placement="top">
-              <el-button type="warning" icon="el-icon-setting" size="mini" :enterable="false" ></el-button>
-            </el-tooltip>
+            <el-button type="primary" size="mini" @click="showEditDialog(scope.row.id)">编辑</el-button>
+<!--            <el-tooltip effect="dark" content="删除" placement="top">-->
+<!--              <el-button type="danger" icon="el-icon-delete" size="mini" :enterable="false" @click="deleteRole(scope.row.id)"></el-button>-->
+<!--            </el-tooltip>-->
           </template>
         </el-table-column>
       </el-table>

@@ -27,6 +27,8 @@ export function updateClubById(club){
         data: {
             id:club.id,
             name:club.name,
+            description:club.description,
+            proprieterId:club.proprieterId
         }
     })
 }
@@ -48,5 +50,17 @@ export function deleteClubById(id){
     return request({
         url:'/club/' + id,
         method:'DELETE'
+    })
+}
+
+export function getClubUserList(clubId,current,size){
+    return request({
+        url:'/club/userList',
+        method:'GET',
+        params:{
+            clubId,
+            current,
+            size
+        }
     })
 }

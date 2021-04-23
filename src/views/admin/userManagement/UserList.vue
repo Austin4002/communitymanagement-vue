@@ -8,7 +8,7 @@
     </el-breadcrumb>
 
     <el-card>
-      <el-table :data="userList">
+      <el-table :data="userList" border stripe>
         <el-table-column label="序号" type="index"></el-table-column>
         <el-table-column label="姓名" prop="name"></el-table-column>
         <el-table-column label="学号" prop="no"></el-table-column>
@@ -16,9 +16,9 @@
         <el-table-column label="性别" prop="sex"></el-table-column>
         <el-table-column label="操作" width="180px">
           <template slot-scope="scope">
-            <el-tooltip effect="Light" content="查看权限" placement="right">
-              <el-button type="warning" icon="el-icon-setting" size="mini" :enterable="false" @click="showUserInfo(scope.row.no)"></el-button>
-            </el-tooltip>
+
+            <el-button type="info" size="mini" :enterable="false" @click="showUserInfo(scope.row.no)">查看详情</el-button>
+
           </template>
         </el-table-column>
       </el-table>
@@ -42,15 +42,15 @@ import {userList} from "@/network/user";
 
 export default {
   name: "UserList",
-  data(){
+  data() {
     return {
-      userList:[],
+      userList: [],
       //当前页码
       currentPage: 1,
       //每页显示条数
       pageSize: 5,
       //总条数
-      totalCount:0,
+      totalCount: 0,
       //总页数
       totalPage: 0,
     }
@@ -58,19 +58,19 @@ export default {
   created() {
     this.getUserList()
   },
-  methods:{
+  methods: {
     //监听pageSize改变的时间
-    handleSizeChange(newSize){
+    handleSizeChange(newSize) {
       this.pageSize = newSize
       this.getUserList()
     },
     //监听翻页操作
-    handleCurrentChange(newPage){
+    handleCurrentChange(newPage) {
       this.currentPage = newPage
       this.getUserList()
     },
-    getUserList(){
-      userList(this.currentPage,this.pageSize).then(res =>{
+    getUserList() {
+      userList(this.currentPage, this.pageSize).then(res => {
         if (res.code !== 200) {
           this.$message({
             showClose: true,
@@ -78,7 +78,7 @@ export default {
             type: 'error',
             center: true
           })
-        } else if (res.code === 200){
+        } else if (res.code === 200) {
           this.userList = res.data.records
           this.totalPage = res.data.pages
           this.totalCount = res.data.total
@@ -86,8 +86,8 @@ export default {
 
       })
     },
-    showUserInfo(stuNo){
-      this.$router.push({path:'/home/userManagement/list/userInfo',query:{no:stuNo}})
+    showUserInfo(stuNo) {
+      this.$router.push({path: '/home/userManagement/list/userInfo', query: {no: stuNo}})
     }
   }
 }

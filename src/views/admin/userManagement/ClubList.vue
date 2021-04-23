@@ -24,7 +24,7 @@
         <el-table-column label="操作" width="180px">
           <template slot-scope="scope">
             <el-tooltip effect="Light" content="编辑" placement="left">
-              <el-button type="primary" icon="el-icon-edit" size="mini" :enterable="false" @click="showEditDialog(scope.row.id)"></el-button>
+              <el-button type="info" size="mini" :enterable="false" @click="showClubInfo(scope.row.id)">查看详情</el-button>
             </el-tooltip>
 <!--            <el-tooltip effect="Light" content="删除" placement="right">-->
 <!--              <el-button type="danger" icon="el-icon-delete" size="mini" :enterable="false" @click="deleteClubById(scope.row.id)"></el-button>-->
@@ -133,7 +133,6 @@ export default {
             center: true
           })
         } else if ( res.code === 200){
-          console.log(res.data);
           this.clubList = res.data.records
           this.totalPage = res.data.pages
           this.totalCount = res.data.total
@@ -141,22 +140,9 @@ export default {
 
       })
     },
-    showEditDialog(id){
-      this.editDialogVisible = true
-      getClubById(id).then(res =>{
-        if(res.code !==200){
-          this.$message({
-            showClose: true,
-            message: '数据查询失败',
-            type: 'error',
-            center: true
-          })
-        } else if (res.code === 200) {
-          this.editForm = res.data
-        }
-      },error =>{
-        console.log(error);
-      })
+    showClubInfo(id){
+      this.$router.push({path:'/home/userManagement/club/clubInfo',query:{id:id}})
+      // console.log(id);
     },
     addClubInfo(){
       this.$refs.addFormRef.validate(valid =>{

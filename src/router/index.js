@@ -29,12 +29,15 @@ const routes = [
     redirect: '/welcome',
     children:[
       { path:'/welcome',component: () => import('../views/Welcome')},
-      { path:'/home/permission/roleList', component: ()=> import('../views/admin/RoleList')},
-      { path:'/home/userManagement/list', component: ()=> import('../views/admin/UserList')},
-      { path:'/home/userManagement/list/userInfo', component: ()=> import('../views/admin/UserInfo')},
-      { path:'/home/userManagement/class', component: ()=> import('../views/admin/ClazzList')},
-      { path:'/home/userManagement/club', component: ()=> import('../views/admin/ClubList')},
-      // { path:'/home/eventManagement/newEvent', component: ()=> import('../views/admin/ClubList')},
+      { path:'/home/permission/roleList', component: ()=> import('../views/admin/permission/RoleList')},
+      { path:'/home/userManagement/list', component: ()=> import('../views/admin/userManagement/UserList')},
+      { path:'/home/userManagement/list/userInfo', component: ()=> import('../views/admin/userManagement/UserInfo')},
+      { path:'/home/userManagement/class', component: ()=> import('../views/admin/userManagement/ClazzList')},
+      { path:'/home/userManagement/club', component: ()=> import('../views/admin/userManagement/ClubList')},
+      { path:'/home/userManagement/club/clubInfo', component: ()=> import('../views/admin/userManagement/ClubInfo')},
+      { path:'/home/eventManagement/newEvent', component: ()=> import('../views/admin/eventManagement/NewEvent')},
+      { path:'/home/eventManagement/approve', component: ()=> import('../views/admin/eventManagement/EventApprove')},
+      { path:'/home/eventManagement/approve/eventInfo', component: ()=> import('../views/admin/eventManagement/EventInfo')},
     ]
   }
 ]
