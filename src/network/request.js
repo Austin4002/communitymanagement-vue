@@ -6,7 +6,7 @@ import 'nprogress/nprogress.css'
 
 export function request(config) {
   const instance = axios.create({
-    // baseURL:'http://172.20.10.6:8080/communityManagement',
+    // baseURL:'http://172.20.10.10:8081/',
     baseURL:'http://127.0.0.1:8081/',
     timeout: 5000,
     // withCredentials:false,

@@ -25,3 +25,19 @@ export function eventList(current, size) {
         }
     })
 }
+
+
+export function proprieterAddEvent(event,clubId) {
+    return request({
+        url: '/proprieterAddEvent',
+        method: 'POST',
+        data: {
+            name: event.name,
+            place: event.place,
+            type1: event.type1,
+            type2: event.type2,
+            startAndEndTime: event.startAndEndTime,
+            clubId:clubId
+        }
+    })
+}

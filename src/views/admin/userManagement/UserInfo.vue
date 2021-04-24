@@ -137,7 +137,7 @@ export default {
       })
     },
     async setUserRole(){
-      const confirmResult = await this.$confirm('确定要修改权限吗，此操作成功后需要重新登录?', '提示', {
+      const confirmResult = await this.$confirm('确定要修改权限吗?此操作成功后需要重新登录', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -146,7 +146,7 @@ export default {
       if(confirmResult !== 'confirm'){
         return this.$message({
           type: 'info',
-          message: '已取消删除'
+          message: '已取消'
         });
       }
       let stuNo = this.$route.query.no;

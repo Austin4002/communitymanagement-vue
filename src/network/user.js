@@ -37,3 +37,20 @@ export function getUserInfo(no){
     method: 'GET'
   })
 }
+
+export function updateUserInfo(user){
+  return request({
+    url:'/updateUser',
+    method:'PUT',
+    data:{
+      no:user.no,
+      password:user.password,
+      phone:user.phone
+    }
+
+  })
+}
+
+
+
+

@@ -13,8 +13,8 @@
         <el-table-column label="审核状态" prop="status">
           <template slot-scope="scope">
             <el-tag effect="dark"
-                    :type="scope.row.status == 0 ?'danger':(scope.row.status==1?'success':(scope.row.status==2?'info':''))">
-              {{ scope.row.status == 0 ? '未通过' : (scope.row.status == 1 ? '已通过' : (scope.row.status == 2 ? '待审核' : '')) }}
+                    :type="scope.row.status == 0 ?'danger':(scope.row.status==1?'success':(scope.row.status==2?'info':(scope.row.status == 3?'primary':'')))">
+              {{ scope.row.status == 0 ? '未通过' : (scope.row.status == 1 ? '已通过' : (scope.row.status == 2 ? '待审核' : (scope.row.status == 3?'组队中':''))) }}
             </el-tag>
           </template>
         </el-table-column>

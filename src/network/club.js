@@ -64,3 +64,34 @@ export function getClubUserList(clubId,current,size){
         }
     })
 }
+
+export function clubUserList(current,size,proprieterNo){
+    return request({
+        url:'/userClubList',
+        method:'GET',
+        params:{
+            current,
+            size,
+            proprieterNo
+        }
+    })
+}
+
+
+export function deleteUserFromClub(proprieterNo,stuNo){
+    return request({
+        url:'/deleteUserFromClub',
+        method:'DELETE',
+        params:{
+            proprieterNo,
+            stuNo,
+        }
+    })
+}
+
+export function getClubByProprieterNo(proprieterNo){
+    return request({
+        url:'/getClubByProprieter/' +proprieterNo,
+        method:'GET',
+    })
+}

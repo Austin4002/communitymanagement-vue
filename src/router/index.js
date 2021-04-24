@@ -29,6 +29,7 @@ const routes = [
     redirect: '/welcome',
     children:[
       { path:'/welcome',component: () => import('../views/Welcome')},
+        //admin的
       { path:'/home/permission/roleList', component: ()=> import('../views/admin/permission/RoleList')},
       { path:'/home/userManagement/list', component: ()=> import('../views/admin/userManagement/UserList')},
       { path:'/home/userManagement/list/userInfo', component: ()=> import('../views/admin/userManagement/UserInfo')},
@@ -38,7 +39,11 @@ const routes = [
       { path:'/home/eventManagement/newEvent', component: ()=> import('../views/admin/eventManagement/NewEvent')},
       { path:'/home/eventManagement/approve', component: ()=> import('../views/admin/eventManagement/EventApprove')},
       { path:'/home/eventManagement/approve/eventInfo', component: ()=> import('../views/admin/eventManagement/EventInfo')},
-    ]
+      //社长的
+      { path:'/home/proprieter/personal/personalInfo', component: ()=> import('../views/proprieter/personal/personalInfo')},
+      { path:'/home/proprieter/clubManagement/clubUserList', component: ()=> import('../views/proprieter/clubManagement/ClubUserList')},
+      { path:'/home/proprieter/eventManagement/newEvent', component: ()=> import('../views/proprieter/eventManagement/NewEvent')},
+    ],
   }
 ]
 
