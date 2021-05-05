@@ -41,3 +41,25 @@ export function proprieterAddEvent(event,clubId) {
         }
     })
 }
+
+
+export function proprieterEventList(current, size) {
+    return request({
+        url: '/proprieterGetEventList',
+        method: 'GET',
+        params: {
+            current,
+            size
+        }
+    })
+}
+
+export function proprieterGetEventInfoById(eventId) {
+    return request({
+        url: '/proprieterGetEventInfoById',
+        method: 'GET',
+        params: {
+            eventId
+        }
+    })
+}

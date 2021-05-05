@@ -24,7 +24,9 @@
         <el-input v-model="form.password"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="danger" @click="updateUserInfo">修改信息</el-button>
+        <el-tooltip effect="dark" content="这里只能修改密码和手机号哦，其他操作不会被提交" placement="top">
+          <el-button type="danger" @click="updateUserInfo">修改信息</el-button>
+        </el-tooltip>
       </el-form-item>
     </el-form>
 

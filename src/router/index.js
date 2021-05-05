@@ -43,6 +43,9 @@ const routes = [
       { path:'/home/proprieter/personal/personalInfo', component: ()=> import('../views/proprieter/personal/personalInfo')},
       { path:'/home/proprieter/clubManagement/clubUserList', component: ()=> import('../views/proprieter/clubManagement/ClubUserList')},
       { path:'/home/proprieter/eventManagement/newEvent', component: ()=> import('../views/proprieter/eventManagement/NewEvent')},
+      { path:'/home/proprieter/eventManagement/eventList', component: ()=> import('../views/proprieter/eventManagement/EventList')},
+      { path:'/home/proprieter/eventManagement/eventInfo', component: ()=> import('../views/proprieter/eventManagement/EventInfo')},
+
     ],
   }
 ]

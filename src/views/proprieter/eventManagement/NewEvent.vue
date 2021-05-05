@@ -118,8 +118,8 @@ export default {
   },
   methods: {
     async addEvent() {
-      if (this.club!==null){
-        await proprieterAddEvent(this.eventForm,this.club.id).then(res => {
+      if (this.club !== null) {
+        await proprieterAddEvent(this.eventForm, this.club.id).then(res => {
           if (res.code === 200) {
             this.$message.success("添加成功")
             this.eventForm = {}
