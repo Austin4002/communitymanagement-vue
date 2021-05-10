@@ -54,12 +54,61 @@ export function proprieterEventList(current, size) {
     })
 }
 
-export function proprieterGetEventInfoById(eventId) {
+export function getEventInfoById(eventId) {
     return request({
-        url: '/proprieterGetEventInfoById',
+        url: '/getEventInfoById',
         method: 'GET',
         params: {
             eventId
+        }
+    })
+}
+
+
+export function changeEventStatus(eventId,status) {
+    return request({
+        url: '/changeEventStatus',
+        method: 'PUT',
+        data: {
+            id:eventId,
+            status:status
+        }
+    })
+}
+
+
+export function proprieterJoinInEvent(stuNo,eventId) {
+    return request({
+        url: '/proprieterJoinInEvent',
+        method: 'GET',
+        params: {
+            stuNo,
+            eventId
+        }
+    })
+}
+
+
+
+
+export function studentEventList(stuNo) {
+    return request({
+        url: '/studentGetEventList',
+        method: 'GET',
+        params: {
+            stuNo
+        }
+    })
+}
+
+
+export function studentSignInEvent(stuNo,eventId) {
+    return request({
+        url: '/studentSignInEvent',
+        method: 'POST',
+        data: {
+            userNo:stuNo,
+            eventId:eventId
         }
     })
 }

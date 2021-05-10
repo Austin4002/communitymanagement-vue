@@ -4,10 +4,9 @@
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path:'/home/eventManagement/approve'}">活动审批</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{path:'/home/proprieter/eventManagement/eventList'}">活动列表</el-breadcrumb-item>
       <el-breadcrumb-item>活动详情</el-breadcrumb-item>
     </el-breadcrumb>
-
     <el-card>
       <el-form :model="eventForm" ref="editFormRef" label-width="150px" label-position="left">
         <el-form-item label="活动名称">
@@ -33,20 +32,16 @@
           <el-input v-model="eventForm.endTime"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="success" @click="approved">通过</el-button>
-          <el-button type="danger" @click="refuse">拒绝</el-button>
+          <el-button type="primary" @click="SignIn">签到</el-button>
         </el-form-item>
       </el-form>
     </el-card>
-
 
   </div>
 </template>
 
 <script>
-
-
-import {changeEventStatus, getEventInfoById} from "@/network/event";
+import {getEventInfoById, studentSignInEvent} from "@/network/event";
 
 export default {
   name: "EventInfo",
@@ -56,8 +51,8 @@ export default {
         place: '',
         type1: '',
         type2: '',
-        clubList: [],
-      }
+      },
+      clubSize: 0
     }
   },
   created() {
@@ -74,27 +69,20 @@ export default {
         }
       })
     },
-    approved() {
+    SignIn() {
       let eventId = this.$route.query.id;
-      changeEventStatus(eventId, 1).then(res => {
+      let stuNo = sessionStorage.getItem("no")
+      studentSignInEvent(stuNo, eventId).then(res => {
         if (res.code === 200) {
-          this.$message.success("操作成功")
-          this.$router.push({path: '/home/eventManagement/approve'})
+          this.$message.success("签到成功")
+        } else if (res.code === 503) {
+          this.$message.warning(res.msg)
         } else {
-          this.$message.error("失败，请重试")
+          this.$message.error("操作失败，请重试")
         }
+
       })
-    },
-    refuse() {
-      let eventId = this.$route.query.id;
-      changeEventStatus(eventId, 0).then(res => {
-        if (res.code === 200) {
-          this.$message.success("操作成功")
-          this.$router.push({path: '/home/eventManagement/approve'})
-        } else {
-          this.$message.error("失败，请重试")
-        }
-      })
+
     }
   }
 }

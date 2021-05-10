@@ -95,3 +95,15 @@ export function getClubByProprieterNo(proprieterNo){
         method:'GET',
     })
 }
+
+
+export function studentJoinClub(stuNo,clubId){
+    return request({
+        url:'/studentJoinClub',
+        method:'POST',
+        data:{
+            userId:stuNo,
+            clubId:clubId
+        }
+    })
+}

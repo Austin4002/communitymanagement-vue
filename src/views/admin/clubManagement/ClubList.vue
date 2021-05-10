@@ -141,7 +141,7 @@ export default {
       })
     },
     showClubInfo(id){
-      this.$router.push({path:'/home/userManagement/club/clubInfo',query:{id:id}})
+      this.$router.push({path:'/home/clubManagement/club/clubInfo',query:{id:id}})
       // console.log(id);
     },
     addClubInfo(){

@@ -12,54 +12,28 @@
         <el-form-item label="活动名称">
           <el-input v-model="eventForm.name"></el-input>
         </el-form-item>
-<!--        <el-form-item label="参与社团">-->
-<!--          <el-transfer v-model="eventForm.value" :data="this.clubList" style="text-align: left; display: inline-block"-->
-<!--                       :titles="['社团列表', '选中的社团']"></el-transfer>-->
-
-<!--        </el-form-item>-->
+        <el-form-item label="参与社团">
+          <el-tag v-for="item in eventForm.clubList">{{ item.name }}</el-tag>
+        </el-form-item>
         <el-form-item label="活动地点">
           <el-input v-model="eventForm.place"></el-input>
         </el-form-item>
 
         <el-form-item label="活动一级类型">
-          <el-select v-model="eventForm.type1" placeholder="请选择">
-            <el-option
-                v-for="item in type1"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-            </el-option>
-          </el-select>
+          <el-input v-model="eventForm.type1"></el-input>
         </el-form-item>
         <el-form-item label="活动二级类型">
-          <el-select v-model="eventForm.type2" placeholder="请选择">
-            <el-option
-                v-for="item in type2"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-            </el-option>
-          </el-select>
+          <el-input v-model="eventForm.type2"></el-input>
         </el-form-item>
-<!--        <el-form-item label="起止时间">-->
-<!--          <el-date-picker-->
-<!--              v-model="eventForm.startAndEndTime"-->
-<!--              format="yyyy年MM月dd日 HH点mm分"-->
-<!--              value-format="yyyy年MM月dd日HH点mm分"-->
-<!--              type="datetimerange"-->
-<!--              range-separator="至"-->
-<!--              start-placeholder="开始时间"-->
-<!--              end-placeholder="结束时间">-->
-<!--          </el-date-picker>-->
-<!--        </el-form-item>-->
         <el-form-item label="开始时间">
           <el-input v-model="eventForm.startTime"></el-input>
         </el-form-item>
         <el-form-item label="结束时间">
           <el-input v-model="eventForm.endTime"></el-input>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="">我要加入</el-button>
+        <el-form-item v-show="eventForm.status > 1">
+          <el-button type="primary" @click="joinIn">我要加入</el-button>
+          <el-button v-show="clubSize >= 3" type="danger" @click="apply">提交申请</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -68,68 +42,58 @@
 </template>
 
 <script>
-import {proprieterGetEventInfoById} from "@/network/event";
+import {changeEventStatus, getEventInfoById, proprieterJoinInEvent} from "@/network/event";
 
 export default {
   name: "EventInfo",
-  data(){
+  data() {
     return {
       eventForm: {
         place: '',
-        type1:'',
-        type2:'',
-        value: [],
-        startAndEndTime:[]
+        type1: '',
+        type2: '',
+        startAndEndTime: []
       },
-      type1: [
-        {
-          value: '国家级',
-          label: '国家级'
-        },
-        {
-          value: '省级',
-          label: '省级'
-        },
-        {
-          value: '校级',
-          label: '校级'
-        },
-        {
-          value:'院级',
-          label:'院级'
-        },
-      ],
-      type2:[
-        {
-          value:'招新',
-          label:'招新'
-        },
-        {
-          value:'换届',
-          label:'换届'
-        },
-        {
-          value:'比赛',
-          label:'比赛'
-        },
-        {
-          value:'展示',
-          label:'展示'
-        }
-      ]
+      clubSize:0
     }
   },
   created() {
     this.getEventById()
   },
-  methods:{
-    getEventById(){
+  methods: {
+    getEventById() {
       let eventId = this.$route.query.id;
-      proprieterGetEventInfoById(eventId).then(res=>{
-        if (res.code!==200){
+      getEventInfoById(eventId).then(res => {
+        if (res.code !== 200) {
           this.$message.error("数据获取失败，请重试")
-        }else{
+        } else {
           this.eventForm = res.data
+          this.clubSize = res.data.clubList.length
+        }
+      })
+    },
+    joinIn() {
+      let stuNo = sessionStorage.getItem("no")
+      let eventId = this.$route.query.id;
+      proprieterJoinInEvent(stuNo, eventId).then(res => {
+        if (res.code === 200) {
+          this.$message.success(res.msg)
+          this.getEventById()
+        } else if (res.code === 503) {
+          this.$message.warning(res.msg)
+        } else {
+          this.$message.error("失败，请重试")
+        }
+      })
+    },
+    apply(){
+      let eventId = this.$route.query.id;
+      changeEventStatus(eventId, 2).then(res => {
+        if (res.code === 200) {
+          this.$message.success("操作成功")
+          this.$router.push({path: '/home/proprieter/eventManagement/eventList'})
+        } else {
+          this.$message.error("失败，请重试")
         }
       })
     }
