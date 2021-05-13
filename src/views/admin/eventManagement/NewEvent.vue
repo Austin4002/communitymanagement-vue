@@ -44,8 +44,8 @@
         <el-form-item label="起止时间">
           <el-date-picker
               v-model="eventForm.startAndEndTime"
-              format="yyyy年MM月dd日 HH点mm分"
-              value-format="yyyy年MM月dd日HH点mm分"
+              format="yyyy-MM-dd HH:mm"
+              value-format="yyyy-MM-dd HH:mm"
               type="datetimerange"
               range-separator="至"
               start-placeholder="开始时间"

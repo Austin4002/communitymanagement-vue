@@ -34,6 +34,8 @@ const routes = [
       { path:'/home/userManagement/list', component: ()=> import('../views/admin/userManagement/UserList')},
       { path:'/home/userManagement/list/userInfo', component: ()=> import('../views/admin/userManagement/UserInfo')},
       { path:'/home/userManagement/class', component: ()=> import('../views/admin/userManagement/ClazzList')},
+      { path:'/home/financeManagement/in', component: ()=> import('../views/admin/financeManagement/In')},
+      { path:'/home/financeManagement/out', component: ()=> import('../views/admin/financeManagement/Out')},
 
       // { path:'/home/userManagement/club', component: ()=> import('../views/admin/clubManagement/ClubList')},
       // { path:'/home/userManagement/club/clubInfo', component: ()=> import('../views/admin/clubManagement/ClubInfo')},
@@ -50,6 +52,9 @@ const routes = [
       { path:'/home/proprieter/eventManagement/newEvent', component: ()=> import('../views/proprieter/eventManagement/NewEvent')},
       { path:'/home/proprieter/eventManagement/eventList', component: ()=> import('../views/proprieter/eventManagement/EventList')},
       { path:'/home/proprieter/eventManagement/eventInfo', component: ()=> import('../views/proprieter/eventManagement/EventInfo')},
+      { path:'/home/proprieter/moneyManagement/financeApply', component: ()=> import('../views/proprieter/financeManagement/FinanceApply')},
+      { path:'/home/proprieter/moneyManagement/financeList', component: ()=> import('../views/proprieter/financeManagement/FinanceList')},
+
       //学生的
       { path:'/home/student/personal/personalInfo', component: ()=> import('../views/proprieter/personal/personalInfo')},
       { path:'/home/student/personal/eventList', component: ()=> import('../views/student/EventList')},
@@ -68,15 +73,15 @@ const router = new VueRouter({
 
 
 // 路由导航守卫
-// router.beforeEach((to,from,next) =>{
-//   if (to.path === '/login'){
-//     return next()
-//   }
-//   const tokenStr = window.sessionStorage.getItem('token');
-//   if (tokenStr == null){
-//     return next('/login')
-//   }
-//   return next()
-// })
+router.beforeEach((to,from,next) =>{
+  if (to.path === '/login'){
+    return next()
+  }
+  const tokenStr = window.sessionStorage.getItem('token');
+  if (tokenStr == null){
+    return next('/login')
+  }
+  return next()
+})
 
 export default router

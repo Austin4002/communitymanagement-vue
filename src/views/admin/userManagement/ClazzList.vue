@@ -131,7 +131,6 @@ export default {
             center: true
           })
         } else if ( res.code === 200){
-          // console.log(res.data);
           this.classList = res.data.records
           this.totalPage = res.data.pages
           this.totalCount = res.data.total

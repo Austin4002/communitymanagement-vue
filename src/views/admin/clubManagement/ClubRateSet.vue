@@ -8,15 +8,15 @@
     </el-breadcrumb>
 
     <el-card>
-      <el-form label-width="150px" label-position="left">
+      <el-form :model="starSet" label-width="150px" label-position="left">
         <el-form-item label="活动数量占比" >
-          <el-input></el-input>
+          <el-input type="number" v-model="starSet.actionRate"></el-input>
         </el-form-item>
         <el-form-item label="签到率占比">
-          <el-input></el-input>
+          <el-input type="number" v-model="starSet.rate" ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="danger">计算</el-button>
+          <el-button type="danger" @click="calculate">计算</el-button>
         </el-form-item>
 
       </el-form>
@@ -25,8 +25,30 @@
 </template>
 
 <script>
+import {calculateStar} from "@/network/club";
+
 export default {
-  name: "ClubRateSet"
+  name: "ClubRateSet",
+  data(){
+    return{
+      starSet:{
+        actionRate:'',
+        rate:''
+      }
+    }
+  },
+  methods:{
+    calculate(){
+      calculateStar(this.starSet.rate,this.starSet.actionRate).then(res=>{
+        if (res.code === 200){
+          this.$message.success("操作成功")
+
+        }else {
+          this.$message.error("操作失败")
+        }
+      })
+    }
+  }
 }
 </script>
 

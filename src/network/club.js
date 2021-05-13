@@ -107,3 +107,15 @@ export function studentJoinClub(stuNo,clubId){
         }
     })
 }
+
+
+export function calculateStar(rate,actionRate){
+    return request({
+        url:'/calculateStar',
+        method:'GET',
+        params:{
+            rate,
+            actionRate
+        }
+    })
+}
