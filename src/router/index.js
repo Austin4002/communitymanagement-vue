@@ -31,6 +31,7 @@ const routes = [
       { path:'/welcome',component: () => import('../views/Welcome')},
         //admin的
       { path:'/home/permission/roleList', component: ()=> import('../views/admin/permission/RoleList')},
+      { path:'/home/permission/behavior', component: ()=> import('../views/admin/permission/BehaviorList')},
       { path:'/home/userManagement/list', component: ()=> import('../views/admin/userManagement/UserList')},
       { path:'/home/userManagement/list/userInfo', component: ()=> import('../views/admin/userManagement/UserInfo')},
       { path:'/home/userManagement/class', component: ()=> import('../views/admin/userManagement/ClazzList')},
