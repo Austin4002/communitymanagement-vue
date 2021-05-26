@@ -2,7 +2,7 @@ import {request} from "@/network/request";
 
 export function adminAddEvent(event) {
     return request({
-        url: '/addEvent',
+        url: '/adminAddEvent',
         method: 'POST',
         data: {
             name: event.name,

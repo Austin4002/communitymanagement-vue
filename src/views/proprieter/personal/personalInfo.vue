@@ -7,17 +7,17 @@
       <el-breadcrumb-item>个人信息</el-breadcrumb-item>
     </el-breadcrumb>
 
-    <el-form :model="form" label-width="80px" label-position="left">
+    <el-form :model="form" :rules="rules" ref="personalRef" label-width="80px" label-position="left">
       <el-form-item label="学号">
-        <el-input v-model="form.no"></el-input>
+        <el-input v-model="form.no" disabled></el-input>
       </el-form-item>
       <el-form-item label="姓名">
-        <el-input v-model="form.name"></el-input>
+        <el-input v-model="form.name" disabled></el-input>
       </el-form-item>
       <el-form-item label="班级">
-        <el-input v-model="form.clazz"></el-input>
+        <el-input v-model="form.clazz" disabled></el-input>
       </el-form-item>
-      <el-form-item label="电话">
+      <el-form-item label="电话" prop="phone">
         <el-input v-model="form.phone"></el-input>
       </el-form-item>
       <el-form-item label="密码">
@@ -42,12 +42,18 @@ export default {
   data() {
     return {
       form: {
-        no:'',
-        name:'',
-        clazz:'',
-        password:'',
-        phone:''
-      }
+        no: '',
+        name: '',
+        clazz: '',
+        password: '',
+        phone: ''
+      },
+      rules: {
+        phone: [
+          // {required: true, message: '请输入学号', trigger: 'blur'},
+          {max: 11, message: '长度超过11位', trigger: 'blur'}
+        ]
+      },
     }
   },
   created() {
@@ -69,19 +75,23 @@ export default {
           this.form.no = res.data.no
           this.form.name = res.data.name
           this.form.clazz = res.data.clazz
-          this.form.password =res.data.password
+          this.form.password = res.data.password
           this.form.phone = res.data.phone
         }
       })
     },
-    async updateUserInfo(){
-      await updateUserInfo(this.form).then(res=>{
-        if (res.code ===200){
-          this.$message.success("更新成功")
-        } else {
-          this.$message.error("更新失败，请重试")
-        }
+    async updateUserInfo() {
+      await this.$refs.personalRef.validate(valid => {
+        if (!valid) return
+        updateUserInfo(this.form).then(res => {
+          if (res.code === 200) {
+            this.$message.success("更新成功")
+          } else {
+            this.$message.error("更新失败，请重试")
+          }
+        })
       })
+
     }
 
   }

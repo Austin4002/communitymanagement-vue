@@ -37,15 +37,15 @@ import {logList} from "@/network/log";
 
 export default {
   name: "BehaviorList",
-  data(){
-    return{
-      logList:[],
+  data() {
+    return {
+      logList: [],
       //当前页码
       currentPage: 1,
       //每页显示条数
       pageSize: 10,
       //总条数
-      totalCount:0,
+      totalCount: 0,
       //总页数
       totalPage: 0,
     }
@@ -53,28 +53,29 @@ export default {
   created() {
     this.getLogList()
   },
-  methods:{
+  methods: {
     //监听pageSize改变的时间
-    handleSizeChange(newSize){
+    handleSizeChange(newSize) {
       this.pageSize = newSize
       this.getLogList()
     },
     //监听翻页操作
-    handleCurrentChange(newPage){
+    handleCurrentChange(newPage) {
       this.currentPage = newPage
       this.getLogList()
     },
-    getLogList(){
-      logList(this.currentPage,this.pageSize).then(res=>{
-        if (res.code ===200){
+    getLogList() {
+      logList(this.currentPage, this.pageSize).then(res => {
+        if (res.code === 200) {
           this.logList = res.data.records
           this.totalPage = res.data.pages
           this.totalCount = res.data.total
-        }else{
+        } else {
           this.$message.error("数据获取失败")
         }
       })
-    }
+    },
+
   }
 }
 </script>

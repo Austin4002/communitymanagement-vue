@@ -64,12 +64,12 @@ export default {
     //监听pageSize改变的时间
     handleSizeChange(newSize){
       this.pageSize = newSize
-      this.getClubList()
+      this.getFinanceList()
     },
     //监听翻页操作
     handleCurrentChange(newPage){
       this.currentPage = newPage
-      this.getClubList()
+      this.getFinanceList()
     },
     getFinanceList() {
       let stuNo = sessionStorage.getItem("no")

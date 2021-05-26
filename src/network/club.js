@@ -28,7 +28,7 @@ export function updateClubById(club){
             id:club.id,
             name:club.name,
             description:club.description,
-            proprieterId:club.proprieterId
+            proprieterId:club.proprieterNo
         }
     })
 }

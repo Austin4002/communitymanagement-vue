@@ -74,6 +74,7 @@ export default {
       eventList(this.currentPage, this.pageSize).then(res => {
         if (res.code === 200) {
           this.eventList = res.data.records
+          this.totalCount = res.data.total
         } else {
           this.$message.error("请求失败，请重试")
         }

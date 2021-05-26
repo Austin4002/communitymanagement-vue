@@ -17,14 +17,14 @@
           <template slot-scope="scope">
             <el-tag effect="dark"
                     :type="scope.row.status == 0 ?'danger':(scope.row.status==1?'success':(scope.row.status==2?'info':''))">
-              {{ scope.row.status == 0 ? '未通过' : (scope.row.status == 1 ? '已通过' : (scope.row.status == 2 ? '待审核' : '')) }}
+              {{ scope.row.status == 0 ? '拒绝' : (scope.row.status == 1 ? '已通过' : (scope.row.status == 2 ? '待审核' : '')) }}
             </el-tag>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="180px">
           <template slot-scope="scope">
-            <el-button type="primary" v-if="scope.row.status!==1" size="mini" :enterable="false" @click="approved(scope.row.id)">通过</el-button>
-            <el-button type="danger" v-if="scope.row.status!==1" size="mini" :enterable="false" @click="refuse(scope.row.id)">拒绝</el-button>
+            <el-button type="primary" v-if="scope.row.status===2" size="mini" :enterable="false" @click="approved(scope.row.id)">通过</el-button>
+            <el-button type="danger" v-if="scope.row.status===2" size="mini" :enterable="false" @click="refuse(scope.row.id)">拒绝</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -69,12 +69,12 @@ export default {
     //监听pageSize改变的时间
     handleSizeChange(newSize) {
       this.pageSize = newSize
-      this.getEventList()
+      this.getFinanceList()
     },
     //监听翻页操作
     handleCurrentChange(newPage) {
       this.currentPage = newPage
-      this.getEventList()
+      this.getFinanceList()
     },
     getFinanceList(){
       financeList(this.currentPage,this.pageSize).then(res => {
@@ -98,7 +98,7 @@ export default {
       })
     },
     refuse(financeId){
-      changeFinanceStatus(financeId,2).then(res=>{
+      changeFinanceStatus(financeId,0).then(res=>{
         if (res.code === 200){
           this.$message.success("操作成功")
           this.getFinanceList()
